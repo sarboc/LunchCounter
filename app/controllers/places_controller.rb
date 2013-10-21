@@ -3,11 +3,10 @@ class PlacesController < ApplicationController
 
 	def index
 		if params[:term]
-			search = URI::escape(params[:term])
-			location = URI::escape(params[:location])
-			path = "/v2/search?&term=#{search}&location=#{location}"
+			@search = URI::escape(params[:term])
+			@location = URI::escape(params[:location])
+			path = "/v2/search?&term=#{@search}&location=#{@location}&limit=5"
 			@results = JSON.parse(get_access_token.get(path).body)
-			# raise @results
 		end
 	end
 
@@ -15,6 +14,13 @@ class PlacesController < ApplicationController
 		business = URI::escape(params[:id])
 		path = "/v2/business/#{business}"
 		@business = JSON.parse(get_access_token.get(path).body)
+	end
+
+	def new
+		@id = params[:id]
+	end
+
+	def create
 	end
 
 end

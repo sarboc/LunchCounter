@@ -5,6 +5,7 @@
 		<% end %>
 	<%= @business["location"]["city"] %><br/>
 	<%= @business["display_phone"] %></p>
+<p><%= link_to "Clock my wait time", new_place_path, class: "btn btn-primary" %></p>
 
 <% @business["reviews"].each do |review| %>
 	<%= review["user"]["name"] %>

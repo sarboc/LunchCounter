@@ -1,3 +1,3 @@
 class Place < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :yelp_id, :average, :reviews
 end
