@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+// $(document).load(function() {
+// 	$("#placeName").attr("value", "<%= @search %>");
+// 	$("#location").attr("value", "<%= @location %>");
+// })

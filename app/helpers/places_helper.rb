@@ -1,8 +1,5 @@
 module PlacesHelper
 	def get_access_token
-		search = URI::escape(params[:term])
-		location = URI::escape(params[:location])
-
 		consumer_key = "xVaX_WEhuVFCYoI3A4gZtw"
 		consumer_secret = "Tkl3m4eTdaw-eexWnnY-PmOMtE8"
 		token = "d1IKQQyCJWw8jR-sY_fYawn6UAq6VFPv"

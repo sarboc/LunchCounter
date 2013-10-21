@@ -3,7 +3,7 @@
 <% if @results %>
 	<% @results["businesses"].each do |business| %>
 		<h4><a href="<%= business['id'] %>"><%= business["name"] %></a></h4>
-		<p><%= business["rating"] %></p>
+		<img src="<%= business['rating_img_url'] %>" />
 		<p><% business["location"]["address"].each do |line| %>
 			<%= line %><br/>
 		<% end %>
