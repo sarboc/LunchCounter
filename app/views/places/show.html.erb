@@ -1,0 +1,14 @@
+<h4><%= @business["name"] %></h4>
+<p><img src="<%= @business['rating_img_url'] %>" /></p>
+<p><% @business["location"]["address"].each do |line| %>
+			<%= line %><br/>
+		<% end %>
+	<%= @business["location"]["city"] %><br/>
+	<%= @business["display_phone"] %></p>
+
+<% @business["reviews"].each do |review| %>
+	<%= review["user"]["name"] %>
+	<p><img src="<%= review['rating_image_url'] %>" /><br/>
+	<%= review["excerpt"] %>  <a href="http://www.yelp.com/biz/<%= @business['id'] %>#hrid:<%= review['id']%>">Read more on yelp.com</a>
+	</p>
+<% end %>

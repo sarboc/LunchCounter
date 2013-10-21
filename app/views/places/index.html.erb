@@ -1,0 +1,12 @@
+<%= render"search" %>
+
+<% if @results %>
+	<% @results["businesses"].each do |business| %>
+		<h4><a href="<%= business['id'] %>"><%= business["name"] %></a></h4>
+		<p><%= business["rating"] %></p>
+		<p><% business["location"]["address"].each do |line| %>
+			<%= line %><br/>
+		<% end %>
+		<%= business["location"]["city"] %></p>
+	<% end %>
+<% end %>
