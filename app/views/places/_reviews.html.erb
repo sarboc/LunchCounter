@@ -1,0 +1,6 @@
+<% @business["reviews"].each do |review| %>
+	<%= review["user"]["name"] %>
+	<p><img src="<%= review['rating_image_url'] %>" /><br/>
+	<%= review["excerpt"] %>  <a href="http://www.yelp.com/biz/<%= @business['id'] %>#hrid:<%= review['id']%>">Read more on yelp.com</a>
+	</p>
+<% end %>

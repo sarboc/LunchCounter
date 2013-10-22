@@ -10,4 +10,13 @@ module PlacesHelper
 		consumer = OAuth::Consumer.new(consumer_key, consumer_secret, {:site => "http://#{api_host}"})
 		OAuth::AccessToken.new(consumer, token, token_secret)
 	end
+
+	def get_counter(id)
+		counter = Place.find_by_yelp_id(id)
+		if counter
+			"The average wait time is #{counter.average} minutes, based on #{counter.reviews} counts."
+		else
+			"This restaurant has not been counted yet. Be the first!"
+		end
+	end
 end

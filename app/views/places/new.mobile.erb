@@ -1,0 +1,15 @@
+<div class="button-span text-center">
+	<h2 id="runner" ></h2>
+	<p><button id="end-button" class="btn btn-primary btn-block" style="display:none;" disabled>I got my food. I'm outta here!</button></p>
+	<p><button id="order-button" class="btn btn-primary btn-block" style="display:none;" disabled>I just ordered. Almost done!</button></p>
+	<p><button id="start-button" class="btn btn-primary btn-block">I'm in line. Start the timer!</button></p>
+	<h2 id="time-message"></h2>
+	<form action="/places" method="post">
+		<input type="hidden" name="id" value="<%= @id %>"/>
+		<input type="hidden" id="start-time" name="startTime" value="" />
+		<input type="hidden" id="order-time" name="orderTime" value="" />
+		<input type="hidden" id="end-time" name="endTime" value="" />
+		<p><input type="hidden" id="save-button" value="Save this counter" class="btn btn-success btn-block"/></p>
+	</form>
+	<p><a id="cancel-button" class="btn btn-danger btn-block" href="/<%= @id %>" style="display:none;">Don't save this counter</a></p>
+</div>

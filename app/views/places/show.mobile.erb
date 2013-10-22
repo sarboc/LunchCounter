@@ -1,0 +1,11 @@
+<%= render"search" %>
+<h4><%= @business["name"] %></h4>
+<p><img src="<%= @business['rating_img_url'] %>" /> (based on <%= @business["review_count"] %> reviews)</p>
+<p><% @business["location"]["address"].each do |line| %>
+			<%= line %><br/>
+		<% end %>
+	<%= @business["location"]["city"] %><br/>
+	<%= @business["display_phone"] %></p>
+<p><%= @message %></p>
+<p><%= link_to "Clock my wait time", new_place_path, class: "btn btn-primary btn-block" %></p>
+

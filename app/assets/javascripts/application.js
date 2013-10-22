@@ -69,7 +69,6 @@ $(document).ready(function() {
 		$("#cancel-button").show();
 		$("#save-button").attr("type", "submit");
 		waitTime = formatTimeOfDay(endTime - startTime);
-		$("#wait-time").attr("value", waitTime);
 		$("#time-message").text("Your total wait time was " + waitTime)
 	});
 })

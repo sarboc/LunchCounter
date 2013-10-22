@@ -1,0 +1,13 @@
+<form role="form" action="/" method="get" class="text-center">
+	<div class="form-group">
+    <label class="sr-only" for="placeName">Name of place</label>
+    <input type="text" class="form-control" id="placeName" name="term" placeholder="Enter the name of a place" value="<%= @raw_search %>" size="22" />
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="location">Location</label>
+    <input type="text" class="form-control" id="location" name="location" placeholder="Enter a city" value="<%= @raw_location %>" size="22" />
+  </div>
+    <p><input type="submit" class="btn btn-primary btn-block" id="submitButton" value="Search" /></p>
+</form>
+<p class="text-center"><a href="http://www.yelp.com"><img src="http://s3-media1.ak.yelpcdn.com/assets/2/www/img/dc8ff90d5d7d/developers/Powered_By_Yelp_Black.png" /></a>
+	</p>
