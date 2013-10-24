@@ -20,6 +20,8 @@ LunchCounter::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  config.assets.precompile += ['mobile.css', 'mobile.js', 'leaflet.ie.css', 'leaflet.css', 'places.css.scss']
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
