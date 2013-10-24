@@ -18,7 +18,7 @@
 
 
 window.onload = function () {
-		L.Icon.Default.imagePath = 'public/assets';
+		L.Icon.Default.imagePath = 'public/assets/images';
 		var lat;
 		var lng;
 		var map;
