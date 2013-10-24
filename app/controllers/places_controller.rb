@@ -29,7 +29,7 @@ class PlacesController < ApplicationController
 	end
 
 	def new
-		@id = params[:id]
+		@business = Place.find_by_yelp_id(params[:id])
 	end
 
 	def create

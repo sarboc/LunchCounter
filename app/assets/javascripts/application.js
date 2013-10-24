@@ -31,6 +31,7 @@ window.onload = function () {
     $("form").on("submit", function(event) {
 			event.preventDefault();
 			getPins();
+			$(":focus").blur();
 		});
 
 		$("#use-address").click(function() {

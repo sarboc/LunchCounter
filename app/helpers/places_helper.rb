@@ -27,6 +27,7 @@ module PlacesHelper
 
 		new_place = {
 			yelp_id: business["id"],
+			name: business["name"],
 			time: 0,
 			reviews: 0,
 			average: 0,
@@ -82,9 +83,10 @@ module PlacesHelper
 
 		result = Typhoeus.get("http://maps.googleapis.com/maps/api/geocode/json?address=#{query}&sensor=true")
 		result_hash = JSON.parse(result.body)
+		location = result_hash["results"][0]["geometry"]["location"]
 
-		lat = result_hash["results"][0]["geometry"]["location"]["lat"]
-		lng = result_hash["results"][0]["geometry"]["location"]["lng"]
+		lat = location["lat"]
+		lng = location["lng"]
 		
 		# postal_code = business["location"]["postal_code"]
 		# street_address = business["location"]["display_address"][0]
