@@ -31,9 +31,6 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'quiet_assets'
-end
-
-group :development
   gem 'sqlite3'
 end
 
