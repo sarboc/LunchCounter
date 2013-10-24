@@ -82,6 +82,7 @@ module PlacesHelper
 
 		result = Typhoeus.get("http://maps.googleapis.com/maps/api/geocode/json?address=#{query}&sensor=true")
 		result_hash = JSON.parse(result.body)
+		binding.pry
 		location = result_hash["results"][0]["geometry"]["location"]
 
 		lat = location["lat"]
