@@ -2,7 +2,7 @@ class PlacesController < ApplicationController
 	# require "oauth"
 
 	def index
-		if params[:term]
+		if params[:location]
 			@search = params[:term]
 			@location = params[:location]
 
