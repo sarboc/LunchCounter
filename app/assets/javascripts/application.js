@@ -18,7 +18,6 @@
 
 
 window.onload = function () {
-		L.Icon.Default.imagePath = "/assets";
 		var marker = new L.Marker({ 
 	   icon: new L.Icon({
 	     iconUrl: "/assets"
@@ -64,6 +63,7 @@ window.onload = function () {
 			map = L.map('map').setView([lat, lng], 14);
     	L.tileLayer('http://{s}.tile.cloudmade.com/115a3b4c774c4af1a44d2d3c39bc134c/998/256/{z}/{x}/{y}.png', 
     	{attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+    	L.Icon.Default.imagePath = "/assets";
 		};
 
 		function getAddress(lat, lng) {
