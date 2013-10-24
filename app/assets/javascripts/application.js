@@ -19,6 +19,11 @@
 
 window.onload = function () {
 		L.Icon.Default.imagePath = "/assets";
+		var marker = new L.Marker({ 
+	   icon: new L.Icon({
+	     iconUrl: "/assets"
+	   })
+		});
 		var lat;
 		var lng;
 		var map;
