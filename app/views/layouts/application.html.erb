@@ -2,11 +2,17 @@
 <html>
 <head>
   <title>LunchCounter</title>
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag    "places" %>
   <%= javascript_include_tag "application" %>
+ 	<!--[if lte IE 8]>
+     <%= stylesheet_link_tag "leaflet-ie.css" %>
+ 	<![endif]-->
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<header>
+		<h1>LunchCounter</h1>
+	</header>
 
 <%= yield %>
 

@@ -9,6 +9,24 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require twitter/bootstrap
+ *= require leaflet.css
  *= require_self
  *= require_tree .
  */
+
+ header {
+ 	text-align: center;
+ }
+
+body {
+	width: 800px;
+	margin: 10px auto;
+}
+
+.form-inline {
+	margin-bottom: 10px;
+}
+
+#map {
+	height: 400px;
+}

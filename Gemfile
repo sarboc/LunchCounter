@@ -27,6 +27,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'pry'
   gem 'pry-rails'
+  gem 'quiet_assets'
 end
 
 gem "typhoeus", "~> 0.6.5"

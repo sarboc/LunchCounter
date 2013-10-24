@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131021162656) do
+ActiveRecord::Schema.define(:version => 20131023155309) do
 
   create_table "places", :force => true do |t|
     t.string   "yelp_id"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20131021162656) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "time"
+    t.float    "lat"
+    t.float    "lng"
   end
 
 end

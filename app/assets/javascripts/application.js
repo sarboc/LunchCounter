@@ -13,62 +13,92 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require jquery.runner-min.js
+//= require leaflet.js
 //= require_tree .
 
-function formatTimeOfDay(millisSinceEpoch) {
-  var secondsSinceEpoch = (millisSinceEpoch / 1000) | 0;
-  var secondsInDay = ((secondsSinceEpoch % 86400) + 86400) % 86400;
-  var seconds = secondsInDay % 60;
-  var minutes = ((secondsInDay / 60) | 0) % 60;
-  var hours = (secondsInDay / 3600) | 0;
-  return hours + (minutes < 10 ? ":0" : ":")
-      + minutes + (seconds < 10 ? ":0" : ":")
-      + seconds;
-}
 
-function disableButton(button) {
-	$(button).removeClass("btn-primary");
-	$(button).addClass("btn-info");
-	$(button).attr("disabled", "disabled");
-}
+window.onload = function () {
+		var lat;
+		var lng;
+		var map;
+		var results;
+		var pins = L.layerGroup();
 
-function enableButton(button) {
-	$(button).removeProp("disabled");
-	$(button).show();
-}
+		if (navigator.geolocation) {
+    	navigator.geolocation.getCurrentPosition(setPosition, setDefault);
+    }
 
-$(document).ready(function() {
-	// $("#placeName").attr("value", "<%= @search %>");
-	// $("#location").attr("value", "<%= @location %>");
-	var startTime
-	var endTime
-	$("#runner").runner();
-	// $("#cancel-button").hide;
-	$("#start-button").click(function() {
-		startTime = $.now();
-		$("#start-time").attr("value", startTime);
-		$("#runner").runner('start');
-		disableButton("#start-button");
-		enableButton("#order-button");
-	});
-	$("#order-button").click(function() {
-		$("#order-time").attr("value", $.now());
-		disableButton("#order-button");
-		enableButton("#end-button");
-	});
-	$("#end-button").click(function() {
-		$("#runner").runner('stop');
-		endTime = $.now();
-		$("#end-time").attr("value", endTime);
-		disableButton("#end-button");
-		$("#runner").hide();
-		$("#end-button").hide();
-		$("#order-button").hide();
-		$("#start-button").hide();
-		$("#cancel-button").show();
-		$("#save-button").attr("type", "submit");
-		waitTime = formatTimeOfDay(endTime - startTime);
-		$("#time-message").text("Your total wait time was " + waitTime)
-	});
-})
+    $("form").on("submit", function(event) {
+			event.preventDefault();
+			getPins();
+		});
+
+		$("#use-address").click(function() {
+			$("#location").val(address);
+			$("form").submit();
+		})
+
+    function setPosition(position){
+		  lat = position.coords.latitude;
+		  lng = position.coords.longitude;
+		  showMap(lat, lng);
+			getAddress(lat, lng)
+		}
+
+		function setDefault(position){
+		  lat = 37.7833;
+		  lng = -122.4167;
+		  showMap(lat, lng);
+		  $("#location").val("San Francisco");
+		  $("#use-address").hide();
+		}
+
+		function showMap(lat, lng) {
+			map = L.map('map').setView([lat, lng], 14);
+    	L.tileLayer('http://{s}.tile.cloudmade.com/115a3b4c774c4af1a44d2d3c39bc134c/998/256/{z}/{x}/{y}.png', 
+    	{attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+		};
+
+		function getAddress(lat, lng) {
+			var latlng = lat + "," + lng;
+			var address
+			$.ajax({
+			    type: "GET",
+			    url: "http://maps.googleapis.com/maps/api/geocode/json",
+			    data: {latlng: latlng, sensor: true},
+			    dataType: 'json',
+			    success: function (response) { 
+			    	city = response["results"][0]["address_components"][3]["long_name"];
+			    	address = response["results"][0]["formatted_address"];
+			    	$("#location").val(city);
+			    }
+			});
+		}
+
+    function getPins() {
+    	pins.clearLayers();
+    	$.ajax({
+			    type: "GET",
+			    url: "/places.json",
+			    data: {term: $("#placeName").val(), location: $("#location").val()},
+			    dataType: 'json',
+			    success: function (response) { 
+			    	var businesses = response["businesses"]
+			    	businesses_array = []
+			      for (var i = 0; i < businesses.length; i++) {
+							var marker = L.marker([businesses[i]["lat"], businesses[i]["lng"]]).bindPopup(
+								"<strong>" + businesses[i]["name"] + "</strong>"
+								 + "<br/>" +
+								businesses[i]["location"]["address"][0]
+								 + "<br/>" +
+								businesses[i]["message"]);
+							businesses_array.push(marker);
+						};
+						pins = L.layerGroup(businesses_array).addTo(map);
+						businesses_array[0].openPopup();
+						map.setView([businesses[0]["lat"], businesses[0]["lng"]], 15);
+			    }
+			});
+    }
+    
+};

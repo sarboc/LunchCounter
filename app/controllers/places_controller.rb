@@ -3,24 +3,29 @@ class PlacesController < ApplicationController
 
 	def index
 		if params[:term]
-			@raw_search = params[:term]
-			@search = URI::escape(@raw_search)
-			@raw_location = params[:location]
-			@location = URI::escape(@raw_location)
-			path = "/v2/search?&term=#{@search}&location=#{@location}&limit=5"
-			@results = JSON.parse(get_access_token.get(path).body)
+			@search = params[:term]
+			@location = params[:location]
 
-			@results["businesses"].each do |business|
-				business["message"] = get_counter(business["id"])
-			end
+			# @search = "sandwich" if @search == ""
+			@location = "San Francisco" if @location == ""
+
+			@results = get_places(@search, @location)
+
+			@results = add_stored_data(@results)
 		end
+
+		respond_to do |format|
+			format.html
+			format.json { render json: @results }
+		end
+
 	end
 
 	def show
-		business = URI::escape(params[:id])
-		path = "/v2/business/#{business}"
-		@business = JSON.parse(get_access_token.get(path).body)
-		@message = get_counter(params[:id])
+		id = params[:id]
+		@business = get_business(id)
+		place = Place.find_by_yelp_id(id)
+		@business["message"] = get_message(place)
 	end
 
 	def new
@@ -33,18 +38,20 @@ class PlacesController < ApplicationController
 		end_time = params[:endTime].to_i
 
 		place = Place.find_by_yelp_id(id)
+		new_data = calculate_time(place, start_time, end_time)
+		place.update_attributes(new_data)
 
-		if place
-			total_time = place.time + (end_time - start_time)
-			total_reviews = place.reviews + 1
-			average = total_time / total_reviews / 60_000
-			place.update_attributes(time: total_time, reviews: total_reviews, average: average)
-		else
-			time = end_time - start_time
-			reviews = 1
-			average = time / 60_000
-			Place.create(yelp_id: id, time: time, reviews: reviews, average: average)
-		end
+		# if place
+		# 	total_time = place.time + (end_time - start_time)
+		# 	total_reviews = place.reviews + 1
+		# 	average = total_time / total_reviews / 60_000
+		# 	place.update_attributes(time: total_time, reviews: total_reviews, average: average)
+		# else
+		# 	time = end_time - start_time
+		# 	reviews = 1
+		# 	average = time / 60_000
+		# 	Place.create(yelp_id: id, time: time, reviews: reviews, average: average)
+		# end
 
 		redirect_to "/#{id}"
 	end
