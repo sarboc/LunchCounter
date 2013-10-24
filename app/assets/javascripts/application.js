@@ -81,6 +81,7 @@ window.onload = function () {
     	$.ajax({
 			    type: "GET",
 			    url: "/places.json",
+			    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', '#{form_authenticity_token}')},
 			    data: {term: $("#placeName").val(), location: $("#location").val()},
 			    dataType: 'json',
 			    success: function (response) { 
