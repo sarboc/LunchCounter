@@ -68,7 +68,7 @@ module PlacesHelper
 		search = URI::escape(term)
 		location = URI::escape(location)
 
-		path = "/v2/search?&term=#{search}&location=#{location}&category_filter=food,restaurants&limit=10"
+		path = "/v2/search?&term=#{search}&location=#{location}&category_filter=food,restaurants&limit=20"
 		JSON.parse(get_access_token.get(path).body)
 	end
 
