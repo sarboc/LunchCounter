@@ -6,7 +6,7 @@
 	<p><button id="start-button" class="btn btn-primary btn-block">I'm in line. Start the timer!</button></p>
 	<h2 id="time-message"></h2>
 	<form action="/places" method="post">
-		<input type="hidden" name="id" value="<%= @business.id %>"/>
+		<input type="hidden" name="id" value="<%= @business.yelp_id %>"/>
 		<input type="hidden" id="start-time" name="startTime" value="" />
 		<input type="hidden" id="order-time" name="orderTime" value="" />
 		<input type="hidden" id="end-time" name="endTime" value="" />

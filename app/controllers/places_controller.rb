@@ -36,7 +36,6 @@ class PlacesController < ApplicationController
 		id = params[:id]
 		start_time = params[:startTime].to_i
 		end_time = params[:endTime].to_i
-
 		place = Place.find_by_yelp_id(id)
 		new_data = calculate_time(place, start_time, end_time)
 		place.update_attributes(new_data)
