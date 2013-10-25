@@ -28,6 +28,7 @@ window.onload = function () {
 		if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(setPosition, setDefault);
     }
+    
 
     $("form").on("submit", function(event) {
 			event.preventDefault();
