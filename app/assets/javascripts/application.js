@@ -18,7 +18,7 @@
 
 
 window.onload = function () {
-		L.Icon.Default.imagePath = '/sites/all/libraries/leaflet/dist/images';
+		L.Icon.Default.imagePath = '/assets';
 		var lat;
 		var lng;
 		var map;
