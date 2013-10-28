@@ -1,9 +1,11 @@
 <div class="button-span text-center">
 	<h4>Add a new counter for <%= @business.name %></h4>
-	<h2 id="runner" ></h2>
-	<p><button id="end-button" class="btn btn-primary btn-block" style="display:none;" disabled>I got my food. I'm outta here!</button></p>
-	<p><button id="order-button" class="btn btn-primary btn-block" style="display:none;" disabled>I just ordered. Almost done!</button></p>
-	<p><button id="start-button" class="btn btn-primary btn-block">I'm in line. Start the timer!</button></p>
+	<div id="timer-buttons">
+		<h2 id="runner" ></h2>
+		<p><button id="end-button" class="btn btn-primary btn-block" style="display:none;" disabled>I got my food. I'm outta here!</button></p>
+		<p><button id="order-button" class="btn btn-primary btn-block" style="display:none;" disabled>I just ordered. Almost done!</button></p>
+		<p><button id="start-button" class="btn btn-primary btn-block">I'm in line. Start the timer!</button></p>
+	</div>
 	<h2 id="time-message"></h2>
 	<form action="/places" method="post">
 		<input type="hidden" name="id" value="<%= @business.yelp_id %>"/>

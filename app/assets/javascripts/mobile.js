@@ -88,10 +88,7 @@ $(document).ready(function() {
 		endTime = $.now();
 		$("#end-time").attr("value", endTime);
 		disableButton("#end-button");
-		$("#runner").hide();
-		$("#end-button").hide();
-		$("#order-button").hide();
-		$("#start-button").hide();
+		$("#timer-buttons").hide();
 		$("#cancel-button").show();
 		$("#save-button").attr("type", "submit");
 		waitTime = formatTimeOfDay(endTime - startTime);
