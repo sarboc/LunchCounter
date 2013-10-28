@@ -7,9 +7,9 @@ class PlacesController < ApplicationController
 
 			@location = "San Francisco" if @location == ""
 
-			@results = get_places(@search, @location)
+			@results = Place.get_places(@search, @location)
 
-			@results = add_stored_data(@results)
+			@results = Place.add_stored_data(@results)
 		end
 
 		respond_to do |format|
@@ -21,9 +21,9 @@ class PlacesController < ApplicationController
 
 	def show
 		id = params[:id]
-		@business = get_business(id)
+		@business = Place.get_business(id)
 		place = Place.find_by_yelp_id(id)
-		@business["message"] = get_message(place)
+		@business["message"] = place.get_message
 	end
 
 	def new
